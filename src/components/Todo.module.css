@@ -1,0 +1,11 @@
+.listitem {
+  padding: 0 !important;
+}
+
+.taskcontent {
+  word-break: break-word;
+}
+
+.close {
+  margin-left: auto !important;
+}
