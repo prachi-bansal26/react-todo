@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TodoForm from "./components/TodoForm";
 import TodoList from './components/TodoList';
+import ShowInstructions from './components/ShowInstructions';
 import Typography from '@material-ui/core/Typography';
 import styles from "./App.module.css";
 
@@ -52,11 +53,14 @@ const App = () => {
       <div className={styles.content}>
         <TodoForm addTodo={addTodo} />
 
-        <TodoList
-          todos={todos}
-          toggleComplete={toggleComplete}
-          deleteTodo={deleteTodo}
-        />
+        {todos.length > 0 ?
+          <TodoList
+            todos={todos}
+            toggleComplete={toggleComplete}
+            deleteTodo={deleteTodo}
+          />
+          : <ShowInstructions />
+        }
       </div>
     </div>
   );
