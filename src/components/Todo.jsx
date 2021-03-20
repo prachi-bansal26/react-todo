@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Checkbox, IconButton, ListItem, Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from './Todo.module.css';
 
 function Todo({ todo, toggleComplete, deleteTodo }) {
+  const [isHovering, setIsHovering] = useState(false);
+
   function handleCheckboxClick() {
     toggleComplete(todo.id);
   }
@@ -11,8 +13,20 @@ function Todo({ todo, toggleComplete, deleteTodo }) {
     deleteTodo(todo.id);
   }
 
+  function handleMouseEnter() {
+    setIsHovering(true);
+  }
+
+  function handleMouseLeave() {
+    setIsHovering(false);
+  }
+
   return (
-    <ListItem className={styles.listitem}>
+    <ListItem
+      className={styles.listitem}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <Checkbox
         checked={todo.completed}
         onClick={handleCheckboxClick}
@@ -27,9 +41,11 @@ function Todo({ todo, toggleComplete, deleteTodo }) {
         {todo.task}
       </Typography>
 
-      <IconButton className={styles.close} onClick={handleDeleteClick}>
-        <CloseIcon />
-      </IconButton>
+      {isHovering &&
+        <IconButton className={styles.close} onClick={handleDeleteClick}>
+          <CloseIcon />
+        </IconButton>
+      }
     </ListItem>
   );
 }
